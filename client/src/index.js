@@ -7,6 +7,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import reducers from './reducers';
 
 import App from './App';
+import './index.css';
 
 const store = configureStore({ reducer: reducers });
 
