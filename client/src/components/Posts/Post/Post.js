@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 import { deletePost } from "../../../actions/posts.js";
 import logo from '../../../images/logo.jpg';
+import { likePost } from "../../../../../server/controllers/posts.js";
 
 const Post = ({ post, setCurrentId }) => {    //props.post
     const classes = useStyles();
@@ -48,7 +49,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
             {/* post like and delete button */}
             <CardActions className={classes.cardActions}>
                 {/* like button */}
-                <Button size="small" color="primary" onClick={() => {}}>
+                <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
                     <ThumbUpAltIcon fontSize="small" />&nbsp;Like {post.likeCount}
                 </Button>
                 {/* delete button */}
