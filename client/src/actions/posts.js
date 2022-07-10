@@ -9,7 +9,7 @@ export const getPosts = () => async (dispatch) => {
     } catch (error) {
         console.log(error);        
     }
-}
+};
 
 export const createPost = (post) => async (dispatch) => {
     try {
@@ -19,7 +19,7 @@ export const createPost = (post) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const updatePost = (id, post) => async (dispatch) => {
     try {
@@ -29,4 +29,14 @@ export const updatePost = (id, post) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
+
+export const deletePost = (id) => async (dispatch) => {
+    try {
+        await api.deletePost(id);
+
+        dispatch({ type: 'DELETE', payload: id});
+    } catch (error) {
+        console.log(error);
+    }
+};
