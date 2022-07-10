@@ -45,6 +45,7 @@ const Form = ({ currentId, setCurrentId }) => {
             tags: '', 
             selectedFile: '' 
         });
+        document.querySelector("input[type='file']").value = "";
     };
 
     return (
@@ -67,7 +68,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
                 {/* file input */}
                 <div className={classes.fileInput}>
-                    <FileBase type="file" multiple={false} onDone={({base64}) => setPostData({ ...postData, selectedFile: base64 })} />
+                    <FileBase multiple={false} onDone={({base64}) => setPostData({ ...postData, selectedFile: base64 })} />
                 </div>
 
                 {/* submit button */}
