@@ -21,19 +21,19 @@ const App = () => {
         <Container maxWidth='lg'>
             {/* header bar */}
             <AppBar className={classes.appBar} position='static' color='inherit'>
-                <Typography className={classes.heading} variant='h2' align='center' style={{color:"#440044"}}>My WebApp</Typography>
+                <Typography className={`${classes.heading} ${classes.headsize}`} variant='h3' align='center'>MyFeed</Typography>
                 <img className={classes.image} src={logo} alt='logo' height='90' />
             </AppBar>
             {/* load effect */}
             <Grow in>
                 <Container>
-                    <Grid container justifyContent='space-between' alignItems='stretch' spacing={3}>
+                    <Grid  className={classes.mainContainer} container justifyContent='space-between' alignItems='stretch' spacing={3}>
                         {/* posts */}
                         <Grid item xs={12} sm={7}>
                             <Posts setCurrentId={setCurrentId} />
                         </Grid>
                         {/* form */}
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={5} md={4}>
                             <Form currentId={currentId} setCurrentId={setCurrentId} />
                         </Grid>
                     </Grid>

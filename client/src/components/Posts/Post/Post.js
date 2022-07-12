@@ -42,7 +42,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
 
             {/* post message */}
             <CardContent>
-                <Typography variant="body1" gutterBottom>{post.message}</Typography>
+                <Typography variant="body1" color="textSecondary">{post.message}</Typography>
             </CardContent>
 
             {/* post like and delete button */}
