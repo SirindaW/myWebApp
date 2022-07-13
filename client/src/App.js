@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar.js';
 import Home from './components/Home/Home.js';
+import Auth from './components/Auth/Auth.js';
 
 const App = () => {
     return(
