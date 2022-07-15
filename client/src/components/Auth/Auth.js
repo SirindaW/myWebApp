@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles.js';
@@ -12,8 +14,11 @@ import { gapi } from 'gapi-script';
 const Auth = () => {
     gapi.load("client:auth2", () => { gapi.client.init({ clientId: "944970062998-llc8j23qi1hv9f1igggo2tllfu4vkktr.apps.googleusercontent.com", plugin_name: "chat", }); });
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
+
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -31,7 +36,16 @@ const Auth = () => {
     }
     
     const googleSuccess = async (res) => {
-        console.log(res);
+        const result = res?.profileObj; // use ?.(optional chaining) to not get an error if res doesn't exist (get undefined instead)
+        const token = res?.tokenId;
+
+        try {
+           dispatch({ type: 'AUTH', data: { result, token } }); 
+
+           history.push('/');
+        } catch (error) {
+            console.log(error);
+        }
     };
     
     const googleFailure = (error) => {
