@@ -3,13 +3,15 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import { GoogleLogin } from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { gapi } from 'gapi-script';
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles.js';
 import Input from './Input.js';
 import Icon from './icon.js';
-import { gapi } from 'gapi-script';
+import { signin, signup } from '../../actions/auth.js';
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
 const Auth = () => {
     gapi.load("client:auth2", () => { gapi.client.init({ clientId: "944970062998-llc8j23qi1hv9f1igggo2tllfu4vkktr.apps.googleusercontent.com", plugin_name: "chat", }); });
@@ -18,16 +20,21 @@ const Auth = () => {
     const history = useHistory();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
-
+    const [formData, setFormData] = useState(initialState);
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(isSignup) {
+            dispatch(signup(formData, history));
+        } else {
+            dispatch(signin(formData, history));
+        }
     };
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     };
 
     const switchMode = () => {
