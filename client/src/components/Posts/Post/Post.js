@@ -21,7 +21,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
 
             {/* post creator and date */} 
             <div className={classes.overlay}>
-                <Typography variant="h6">{post.creator}</Typography>
+                <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
 
@@ -49,7 +49,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
             <CardActions className={classes.cardActions}>
                 {/* like button */}
                 <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
-                    <ThumbUpAltIcon fontSize="small" />&nbsp;Like {post.likeCount}
+                    <ThumbUpAltIcon fontSize="small" />&nbsp;Like {post.likes.length}
                 </Button>
                 {/* delete button */}
                 <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>

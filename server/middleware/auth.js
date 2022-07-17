@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 const auth = async (req, res, next) => {
     try {
         // middleware is for check if user's token is valid then use next() to let user do the action (ex. like, delete post)
-        console.log(req.headers.authorization);
         const token = req.headers.authorization.split(" ")[1];
         const isCustomAuth = token.length < 500; // >=500 is GoogleAuth
 
@@ -18,6 +17,8 @@ const auth = async (req, res, next) => {
 
             req.userId = decodedData?.sub; // sub is google's specific id (different for every google user)
         }
+
+        next();
 
     } catch (error) {
        console.log(error); 
