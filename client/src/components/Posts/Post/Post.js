@@ -19,7 +19,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
     const LikeCount = () => {
         return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
         ? (
-            <>{post.likes.length > 1 ? `You and ${post.likes.length - 1} other${post.likes.length > 2 && 's'}` : 'You'}</> // liked
+            <>{post.likes.length > 1 ? `You and ${post.likes.length - 1} other${post.likes.length > 2 ? 's' : ''}` : 'You'}</> // liked
         ) : (
             <>{post.likes.length}</> // not like yet
         );
@@ -46,11 +46,13 @@ const Post = ({ post, setCurrentId }) => {    //props.post
             </div>
 
             {/* post edit button */} 
-            <div className={classes.overlay2}>
-                <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
-                    <MoreHorizIcon fontSize="medium" />
-                </Button>
-            </div>
+            {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                <div className={classes.overlay2}>
+                    <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
+                        <MoreHorizIcon fontSize="medium" />
+                    </Button>
+                </div>
+            )}
 
             {/* post tags */}
             <div className={classes.details}>
@@ -80,9 +82,11 @@ const Post = ({ post, setCurrentId }) => {    //props.post
                     <LikeBtn />&nbsp;Like
                 </Button>
                 {/* delete button */}
-                <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(deletePost(post._id))}>
-                    <DeleteIcon fontSize="small" />&nbsp;Delete
-                </Button>
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                    <Button size="small" color="primary"  onClick={() => dispatch(deletePost(post._id))}>
+                        <DeleteIcon fontSize="small" />&nbsp;Delete
+                    </Button>
+                )}
             </CardActions>
         </Card>
     );
