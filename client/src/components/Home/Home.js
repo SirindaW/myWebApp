@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Grow, Grid } from '@material-ui/core'
+import { Container, Grow, Grid, Paper } from '@material-ui/core'
 import { useDispatch } from 'react-redux';
+
 import Posts from '../Posts/Posts.js';
 import Form from '../Form/Form.js';
 import useStyles from './styles.js';
 import { getPosts } from '../../actions/posts.js';
+import Pagination from '../Pagination.jsx';
 
 const Home = () => {
     const [currentId, setCurrentId] = useState(null);
@@ -20,12 +22,15 @@ const Home = () => {
             <Container>
                 <Grid  className={classes.mainContainer} container justifyContent='space-between' alignItems='stretch' spacing={3}>
                     {/* posts */}
-                    <Grid item xs={12} sm={7}>
+                    <Grid item xs={12} sm={8}>
                         <Posts setCurrentId={setCurrentId} />
                     </Grid>
                     {/* form */}
-                    <Grid item xs={12} sm={5} md={4}>
+                    <Grid item xs={12} sm={4}>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
+                        <Paper elevation={6}>
+                            <Pagination />
+                        </Paper>
                     </Grid>
                 </Grid>
             </Container>
