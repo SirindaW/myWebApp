@@ -7,7 +7,7 @@ import ChipInput from 'material-ui-chip-input';
 import Posts from '../Posts/Posts.js';
 import Form from '../Form/Form.js';
 import useStyles from './styles.js';
-import { getPosts } from '../../actions/posts.js';
+import { getPosts, getPostsBySearch } from '../../actions/posts.js';
 import Pagination from '../Pagination.jsx';
 
 function useQuery() {
@@ -30,15 +30,17 @@ const Home = () => {
     }, [currentId, dispatch]);
 
     const searchPost = () => {
-        if(search.trim()) {
-            // dispatch to fetch search post
+        if(search.trim() || tags) {
+            dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
+        } else {
+            history.push('/posts');
         }
-    }
+    };
 
     const handleKeyPress = (e) => {
         // 'enter' key is 13
         if(e.keyCode === 13) {
-            // search post
+            searchPost();
         }
     };
 
@@ -74,7 +76,7 @@ const Home = () => {
                                 label="Search Tags"
                                 variant="outlined"
                             />
-                            <Button onClick={searchPost} className={classes.searchButton} color="primary">Search</Button>
+                            <Button onClick={searchPost} className={classes.searchButton} color="primary" variant="contained">Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         <Paper elevation={6}>
