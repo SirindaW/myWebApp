@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import { useSelector } from "react-redux";
 import Post from './Post/Post.js';
 import useStyles from './styles.js';
@@ -11,10 +11,10 @@ const Posts = ({ setCurrentId }) => {
     console.log(posts);
 
     return (
-        !posts.length ? <Typography variant="h4" align="center" style={{color: "white"}}>No Posts Yet</Typography> : (
+        !posts.length ? <CircularProgress thickness={5} size={60} style={{color: "white"}} /> : (
             <Grid className={classes.container} container alignItems="stretch" spacing={3}>
                 {posts.map((post) => (
-                    <Grid key={post._id} item xs={12} md={6}>
+                    <Grid key={post._id} item xs={12} md={6} lg={4}>
                         <Post post={post} setCurrentId={setCurrentId} />
                     </Grid>
                 ))}
