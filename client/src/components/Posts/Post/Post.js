@@ -9,7 +9,7 @@ import useStyles from './styles.js';
 import { useDispatch } from "react-redux";
 
 import { deletePost, likePost } from "../../../actions/posts.js";
-import logo from '../../../images/logo.jpg';
+import logo from '../../../images/logo.png';
 
 const Post = ({ post, setCurrentId }) => {    //props.post
     const classes = useStyles();
@@ -35,7 +35,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
     }
     
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} raised elevation={6}>
             {/* post img */}
             <CardMedia className={classes.media} image={post.selectedFile ? post.selectedFile : logo} title={post.title} />
 

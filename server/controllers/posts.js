@@ -15,7 +15,11 @@ export const getPostsBySearch = async (req, res) => {
     const { searchQuery, tags } = req.query;
 
     try {
-        const title = new RegExp(searchQuery, 'i'); // i means ignore case (Upper,Lower)
+        if(searchQuery) {
+            var title = new RegExp(searchQuery, 'i'); // i means ignore case (Upper,Lower)
+        } else {
+            var title = null;
+        }
         
         const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
 
