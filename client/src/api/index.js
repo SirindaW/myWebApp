@@ -7,15 +7,15 @@ const userUrl = '/user';
 
 // do this before all request
 API.interceptors.request.use((req) => {
-    if(localStorage.getItem('profile')) {
+    if (localStorage.getItem('profile')) {
         req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
     }
-    
+
     return req;
 })
 
 export const fetchPosts = (page) => API.get(`${postUrl}?page=${page}`);
-export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search}&tags=${searchQuery.tags}`); 
+export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search}&tags=${searchQuery.tags}`);
 export const createPost = (newPost) => API.post(postUrl, newPost);
 export const updatePost = (id, updatedPost) => API.patch(`${postUrl}/${id}`, updatedPost);
 export const deletePost = (id) => API.delete(`${postUrl}/${id}`);

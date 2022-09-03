@@ -5,13 +5,13 @@ import Post from './Post/Post.js';
 import useStyles from './styles.js';
 
 const Posts = ({ setCurrentId }) => {
-    const posts = useSelector((state) => state.posts);
+    const { posts } = useSelector((state) => state.posts);
     const classes = useStyles();
 
     console.log(posts);
 
     return (
-        !posts.length ? <Typography variant="h4" align="center" color="primary">No Posts Yet</Typography> : (
+        !posts?.length ? <Typography variant="h4" align="center" color="primary">No Posts Yet</Typography> : (
             <Grid className={classes.container} container alignItems="stretch" spacing={3}>
                 {posts.map((post) => (
                     <Grid key={post._id} item xs={12} md={6} lg={4}>
