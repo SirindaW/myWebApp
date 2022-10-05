@@ -5,13 +5,13 @@ export const getPosts = async (req, res) => {
     const { page } = req.query;
 
     try {
-        const LIMIT = 6;
-        const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
+        const LIMITPOST_PER_PAGE = 6;
+        const startIndex = (Number(page) - 1) * LIMITPOST_PER_PAGE; // get the starting index of every page
         const total = await PostMessage.countDocuments({});
 
-        const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+        const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMITPOST_PER_PAGE).skip(startIndex);
         
-        res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
+        res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMITPOST_PER_PAGE) });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

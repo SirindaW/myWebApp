@@ -50,7 +50,7 @@ const Home = () => {
             <Container maxWidth="xl">
                 <Grid className={classes.gridContainer} container justifyContent='space-between' alignItems='stretch' spacing={3}>
                     {/* posts */}
-                    <Grid item xs={12} sm={6} md={9}>
+                    <Grid item xs={12} sm={6} md={9} style={{positon : 'relative'}}>
                         <Posts setCurrentId={setCurrentId} />
                     </Grid>
                     {/* form and search bar */}
