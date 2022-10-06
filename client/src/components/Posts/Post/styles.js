@@ -55,4 +55,12 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
+    '&:hover': {
+      filter: 'brightness(75%)',
+      transition: '0.4s',
+    }
+  },
 });
