@@ -36,7 +36,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
             );
     }
     
-    const openPost = () => history.push(`/posts/${post._id}`);
+    const openPost = () => history.push(`/posts/details/${post._id}`);
 
     return (
         <Card className={classes.card} raised elevation={6}>
