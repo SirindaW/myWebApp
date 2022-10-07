@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 
 import { deletePost, likePost } from "../../../actions/posts.js";
 import logo from '../../../images/logo.png';
+import { postUrl } from "../../../constants/pathUrl.js";
 
 const Post = ({ post, setCurrentId }) => {    //props.post
     const classes = useStyles();
@@ -36,7 +37,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
             );
     }
     
-    const openPost = () => history.push(`/posts/details/${post._id}`);
+    const openPost = () => history.push(`${postUrl}/details/${post._id}`);
 
     return (
         <Card className={classes.card} raised elevation={6}>
@@ -68,7 +69,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
                 <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
 
                 {/* post message */}
-                <CardContent>
+                <CardContent className={classes.ellipsis}>
                     <Typography variant="body1" color="textSecondary">{post.message}</Typography>
                 </CardContent>
             </ButtonBase>

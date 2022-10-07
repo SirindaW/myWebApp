@@ -29,11 +29,34 @@ export default makeStyles((theme) => ({
   },
   recommendedPosts: {
     display: 'flex',
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-    },
+    overflowX: 'scroll'
   },
   loadingPaper: {
-    display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', height: '39vh',
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    padding: '20px', 
+    borderRadius: '15px', 
+    height: '39vh',
   },
+  ellipsis: {
+    maxHeight: '70px',
+    paddingBottom: '10px',
+    marginBottom: '10px',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '3', /* number of lines to show */
+    '-webkit-box-orient': 'vertical',
+  },
+  post: {
+    margin: '20px',
+    padding: '20px',
+    cursor: 'pointer',
+    width: '270px',
+    borderRadius: '15px',
+    '&:hover': {
+      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+      transition: '0.4s',
+    }
+  }
 }));

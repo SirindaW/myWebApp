@@ -6,6 +6,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles.js'
+import { postUrl } from '../../constants/pathUrl.js';
 
 const PostDetails = () => {
     const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -26,16 +27,9 @@ const PostDetails = () => {
     
     if(!post) return null;
 
-    // if(isLoading) {
-    //     return (
-    //     <Paper elevation={6} className={classes.loadingPaper}>
-    //         <CircularProgress size='7em' />
-    //     </Paper>)
-    // }
-
-    
     const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
-    console.log(recommendedPosts);
+    
+    const openPost = (_id) => history.push(`${postUrl}/details/${_id}`);
 
     return (
         isLoading ? (<Paper elevation={6} className={classes.loadingPaper}><CircularProgress size='7em' /></Paper>) : (
@@ -64,8 +58,12 @@ const PostDetails = () => {
                         <Divider />
                         <div className={classes.recommendedPosts}>
                             {recommendedPosts.map(({ title, message, name, likes, selectedFile, _id }) => (
-                                <div>
-                                    {title}
+                                <div className={classes.post} onClick={() => openPost(_id)} key={_id}>
+                                    <Typography gutterBottom variant='h6'>{title}</Typography>
+                                    <Typography gutterBottom variant='subtitle2'>Created by: {name}</Typography>
+                                    <Typography className={classes.ellipsis} gutterBottom variant='subtitle1'>{message}</Typography>
+                                    <Typography gutterBottom variant='subtitle2'>Likes: {likes.length}</Typography>
+                                    <img src={selectedFile} width='200px' />
                                 </div>
                             ))}
                         </div>

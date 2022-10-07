@@ -45,7 +45,7 @@ export default makeStyles({
   },
   likeCount: {
     display: 'flex',
-    margin: '20px'
+    margin: '0px 20px 10px 20px'
   },
   title: {
     padding: '0 16px',
@@ -63,4 +63,13 @@ export default makeStyles({
       transition: '0.4s',
     }
   },
+  ellipsis: {
+    maxHeight: '120px',
+    paddingBottom: '28px',
+    marginBottom: '10px',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '6', /* number of lines to show */
+    '-webkit-box-orient': 'vertical',
+  }
 });

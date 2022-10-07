@@ -1,9 +1,7 @@
 import axios from 'axios';
+import { postUrl, userUrl } from '../constants/pathUrl.js';
 
 const API = axios.create({ baseURL: 'http://localhost:5000' });
-
-const postUrl = '/posts';
-const userUrl = '/user';
 
 // do this before all request
 API.interceptors.request.use((req) => {

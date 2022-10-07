@@ -15,7 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
         tags: '', 
         selectedFile: '' 
     });
-    const post = useSelector((state) => currentId ? state.posts.find((post) => post._id === currentId) : null);
+    const post = useSelector((state) => currentId ? state.posts.posts.find((post) => post._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));

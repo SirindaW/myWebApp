@@ -8,6 +8,7 @@ import Posts from '../Posts/Posts.js';
 import Form from '../Form/Form.js';
 import useStyles from './styles.js';
 import { getPosts, getPostsBySearch } from '../../actions/posts.js';
+import { postUrl } from '../../constants/pathUrl.js';
 import Pagination from '../Pagination.jsx';
 
 function useQuery() {
@@ -28,9 +29,9 @@ const Home = () => {
     const searchPost = () => {
         if(search.trim() || tags.length !== 0) {
             dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
-            history.push(`/posts/search?searchQuery=${search}&tags=${tags.join(',')}`);
+            history.push(`${postUrl}/search?searchQuery=${search}&tags=${tags.join(',')}`);
         } else {
-            history.push('/posts');
+            history.push(postUrl);
         }
     };
 
