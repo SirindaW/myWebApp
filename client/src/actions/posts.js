@@ -1,5 +1,6 @@
 import * as api from '../api';
 import { FETCH_ALL, FETCH_POST, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, START_LOADING, END_LOADING } from '../constants/actionTypes';
+import { postUrl } from '../constants/pathUrl';
 
 // Action Creators
 export const getPost = (id) => async (dispatch) => {
@@ -38,10 +39,12 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     }
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, history) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
         const { data } = await api.createPost(post);
+        
+        history.push(`${postUrl}/details/${data._id}`)
 
         dispatch({ type: CREATE, payload: data });
         dispatch({ type: END_LOADING });

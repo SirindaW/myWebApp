@@ -23,7 +23,7 @@ const Auth = () => {
     const [formData, setFormData] = useState(initialState);
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
-
+   
     const handleSubmit = (e) => {
         e.preventDefault();
         if(isSignup) {
