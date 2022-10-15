@@ -58,5 +58,14 @@ export default makeStyles((theme) => ({
       boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
       transition: '0.4s',
     }
+  },
+  commentsOuterContainer: {
+    display: 'flex', 
+    justifyContent: 'space-between'
+  },
+  commentsInnerContainer: {
+    height: '200px',
+    overflowY: 'auto',
+    marginRight: '30px' 
   }
 }));

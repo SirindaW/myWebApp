@@ -66,19 +66,27 @@ export const updatePost = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
 
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+    try {
+        const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
 
-    res.json(updatedPost);
+        res.status(200).json(updatedPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
 };
 
 export const deletePost = async (req, res) => {
     const { id } = req.params;
 
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
-    
-    await PostMessage.findByIdAndRemove(id);
 
-    res.json({ message: 'Post deleted successfully' });
+    try {
+        await PostMessage.findByIdAndRemove(id);
+
+        res.status(200).json({ message: 'Post deleted successfully' });
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
 };
 
 export const likePost = async (req, res) => {
@@ -88,17 +96,42 @@ export const likePost = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
 
-    const post = await PostMessage.findById(id);
-    const index = post.likes.findIndex((id) => id === String(req.userId));
+    try {
+        const post = await PostMessage.findById(id);
+        const index = post.likes.findIndex((id) => id === String(req.userId));
 
-    // index = -1 means not like post yet
-    if(index === -1) {
-        post.likes.push(req.userId); // like the post
-    } else {
-        post.likes = post.likes.filter((id) => id !== String(req.userId)); // return all the like except current person like (remove current person like / dislike)
+        // index = -1 means not like post yet
+        if(index === -1) {
+            post.likes.push(req.userId); // like the post
+        } else {
+            post.likes = post.likes.filter((id) => id !== String(req.userId)); // return all the like except current person like (remove current person like / dislike)
+        }
+
+        const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+        
+        res.status(200).json(updatedPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
     }
-
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
-    
-    res.json(updatedPost);
 }
+
+export const commentPost = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    console.log(req);
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+
+    try {
+        const post = await PostMessage.findById(id);
+
+        post.comments.push(value);
+
+        const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+
+        res.status(201).json(updatedPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message }); 
+    }
+};
+
