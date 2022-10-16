@@ -21,15 +21,18 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
     const [formData, setFormData] = useState(initialState);
+    const [errMsg, setErrMsg] = useState('');
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
    
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(isSignup) {
-            dispatch(signup(formData, history));
+            const { message } = await dispatch(signup(formData, history));
+            setErrMsg(message);
         } else {
-            dispatch(signin(formData, history));
+            const { message } = await dispatch(signin(formData, history));
+            setErrMsg(message);
         }
     };
 
@@ -40,6 +43,7 @@ const Auth = () => {
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup); 
         setShowPassword(false);
+        setErrMsg('')
     }
     
     const googleSuccess = async (res) => {
@@ -81,6 +85,7 @@ const Auth = () => {
                             <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
                         }
                     </Grid>
+                    <Typography variant='body2' color='secondary' className={classes.errMsg}>{errMsg}</Typography>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         { isSignup ? 'Sign up' : 'Sign in' }
                     </Button>
