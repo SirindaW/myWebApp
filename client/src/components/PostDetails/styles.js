@@ -60,12 +60,17 @@ export default makeStyles((theme) => ({
     }
   },
   commentsOuterContainer: {
-    display: 'flex', 
-    justifyContent: 'space-between'
+    // display: 'flex', 
+    // justifyContent: 'space-between'
   },
   commentsInnerContainer: {
-    height: '200px',
+    maxHeight: '200px',
     overflowY: 'auto',
-    marginRight: '30px' 
+    margin: '15px 30px 0 0' 
+  },
+  buttonContainer: {
+    display: 'flex', 
+    justifyContent: 'right',
+    marginBottom: '7px'
   }
 }));

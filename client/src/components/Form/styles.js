@@ -6,8 +6,13 @@ export default makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   paper: {
     padding: theme.spacing(2),
+    width: '500px'
   },
   form: {
     display: 'flex',

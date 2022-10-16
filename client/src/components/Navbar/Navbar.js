@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import logo from '../../images/logo.png';
 import useStyles from './styles.js';
+import { postUrl } from '../../constants/pathUrl';
 
 const Navbar = () => { 
     const classes = useStyles();
@@ -18,6 +19,8 @@ const Navbar = () => {
         history.push('/');
         setUser(null);
     };
+
+    const handleCreate = () => history.push(`${postUrl}/create`);
 
     useEffect(() => {
         const token = user?.token;
@@ -39,9 +42,12 @@ const Navbar = () => {
             <Toolbar className={classes.toolbar}>
                 {user ? (
                     <div className={classes.profile}>
-                        <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
-                        <Typography className={classes.userName} variant="h6">{user.result.name}</Typography>
-                        <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Log out</Button>
+                        <div className={classes.info}>
+                            <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                            <Typography className={classes.userName} variant="h6">{user.result.name}</Typography>
+                        </div>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={handleCreate}>Create Post</Button>
+                        <Button variant="contained" className={classes.button} color="secondary" onClick={logout}>Log out</Button>
                     </div>
                 ) : (
                     <Button component={Link} to="/auth" variant="contained" color="primary">Sign in</Button>

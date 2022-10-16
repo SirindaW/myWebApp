@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
+import { Paper, Typography, CircularProgress, Divider, Button } from '@material-ui/core';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
@@ -15,6 +16,7 @@ const PostDetails = () => {
     const history = useHistory();
     const classes = useStyles();
     const { id } = useParams();
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
         dispatch(getPost(id));
@@ -32,9 +34,21 @@ const PostDetails = () => {
     
     const openPost = (_id) => history.push(`${postUrl}/details/${_id}`);
 
+    const handleEdit = () => {
+        history.push(`${postUrl}/edit/${post._id}`);
+    };
+
     return (
         isLoading ? (<Paper elevation={6} className={classes.loadingPaper}><CircularProgress size='7em' /></Paper>) : (
             <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+                {/* post edit button */} 
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                    <div className={classes.buttonContainer}>
+                        <Button style={{color: 'black'}} size="medium" onClick={handleEdit}>
+                            <MoreHorizIcon fontSize="medium" />
+                        </Button>
+                    </div>
+                )}
                 <div className={classes.card}>
                     <div className={classes.section}>
                         <Typography variant="h3" component="h2">{post.title}</Typography>

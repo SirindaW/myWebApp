@@ -3,7 +3,6 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBa
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import useStyles from './styles.js';
 import { useDispatch } from "react-redux";
@@ -18,7 +17,7 @@ const Post = ({ post, setCurrentId }) => {    //props.post
     const dispatch = useDispatch();
     const history = useHistory();
     const user = JSON.parse(localStorage.getItem('profile'));
-    const [likes, setLikes] = useState(post?.likes)
+    const [likes, setLikes] = useState(post?.likes);
 
     const userId = user?.result?.googleId || user?.result?._id;
     const hasLikedPost = likes.find((like) => like === userId);
@@ -67,13 +66,13 @@ const Post = ({ post, setCurrentId }) => {    //props.post
                 </div>
 
                 {/* post edit button */} 
-                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                {/* {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
                     <div className={classes.overlay2}>
                         <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
                             <MoreHorizIcon fontSize="medium" />
                         </Button>
                     </div>
-                )}
+                )} */}
 
                 {/* post tags */}
                 <div className={classes.details}>

@@ -27,15 +27,16 @@ export default makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '400px',
+    width: '500px',
     [theme.breakpoints.down('sm')]: {
       width: 'auto',
     },
   },
   profile: {
     display: 'flex',
-    justifyContent: 'space-between',
-    width: '400px',
+    justifyContent: 'right',
+    flexWrap: 'wrap',
+    width: '500px',
     alignItems: 'center',
     [theme.breakpoints.down('sm')]: {
       width: 'auto',
@@ -43,13 +44,20 @@ export default makeStyles((theme) => ({
       justifyContent: 'center',
     },
   },
-  logout: {
+  button: {
     marginLeft: '20px',
+    [theme.breakpoints.down('sm')]: {
+      width: 'auto',
+      marginTop: 20,
+      justifyContent: 'center',
+      marginBottom: '5px'
+    },
   },
   userName: {
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
+    margin: '0 35px 0 20px'
   },
   brandContainer: {
     display: 'flex',
@@ -58,5 +66,15 @@ export default makeStyles((theme) => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+  },
+  info: {
+    display: 'flex',
+    justifyContent: 'left',
+    [theme.breakpoints.down('sm')]: {
+      width: 'auto',
+      marginTop: 20,
+      justifyContent: 'center',
+      marginBottom: '5px'
+    },
   },
 }));
