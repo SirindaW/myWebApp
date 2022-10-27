@@ -6,7 +6,7 @@
 - Front-end using React Redux and Material-UI
 - Back-end using NodeJS, ExpressJS and MongoDB
 
-### How To Run
+### How to run
 Create .env file in `/myWebApp/server` with your Port and MongoDB URL:
 ```
 PORT = "PORT"
