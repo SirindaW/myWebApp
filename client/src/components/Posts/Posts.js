@@ -1,6 +1,7 @@
 import React from "react";
 import { Paper, CircularProgress, Grid, Typography } from '@material-ui/core';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+
 import Post from './Post/Post.js';
 import useStyles from './styles.js';
 

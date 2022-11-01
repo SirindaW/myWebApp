@@ -23,8 +23,20 @@ const Home = () => {
     const history = useHistory();
     const page = query.get('page') || 1; // get value of page params at url
     const searchQuery = query.get('searchQuery'); // get value of searchQuery params at url
+    const tagsQuery = query.get('tags'); // get value of searchQuery params at url
     const [search, setSearch] = useState('');
     const [tags, setTags] = useState([]);
+
+    useEffect(() => {
+        setSearch(searchQuery)
+        if(tagsQuery.split(',').length > 0 && tagsQuery.split(',')[0] !== ''){
+            setTags(tagsQuery.split(','))
+        }else{
+            setTags([])
+        }
+        dispatch(getPostsBySearch({ search: searchQuery, tags: tagsQuery.split(',') }));
+
+    }, [searchQuery, tagsQuery])
 
     const searchPost = () => {
         if(search.trim() || tags.length !== 0) {
@@ -77,7 +89,7 @@ const Home = () => {
                             <Button onClick={searchPost} className={classes.searchButton} color="primary" variant="contained">Search</Button>
                         </AppBar>
                         {/* <Form currentId={currentId} setCurrentId={setCurrentId} /> */}
-                        {(!searchQuery && !tags.length) && (
+                        {(!searchQuery && !tagsQuery) && (
                             <Paper elevation={6} className={classes.pagination}>
                                 <Pagination page={page} />
                             </Paper>
