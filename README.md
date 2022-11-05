@@ -2,7 +2,7 @@
 
 ### Project Title : Vision
 ### Project Description 
-- Simple blog web application that has an account for you to read, write, like and comment on blogs.
+- Simple blog web application that you can register for an account to read, write, like and comment on blogs.
 - Front-end using React Redux and Material-UI
 - Back-end using NodeJS, ExpressJS and MongoDB
 
